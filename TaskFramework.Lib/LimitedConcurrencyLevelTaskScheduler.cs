@@ -19,7 +19,7 @@ namespace TaskFramework.Lib
         private readonly LinkedList<Task> _tasks = new LinkedList<Task>(); // protected by lock(_tasks) 
 
         // The maximum concurrency level allowed by this scheduler.  
-        private readonly int _maxDegreeOfParallelism;
+        private  int _maxDegreeOfParallelism;
 
         // Indicates whether the scheduler is currently processing work items.  
         private int _delegatesQueuedOrRunning = 0;
@@ -30,6 +30,13 @@ namespace TaskFramework.Lib
             if (maxDegreeOfParallelism < 1) throw new ArgumentOutOfRangeException("maxDegreeOfParallelism");
             _maxDegreeOfParallelism = maxDegreeOfParallelism;
         }
+
+        public void SetMaxDegreeOfParallelism(int maxDegreeOfParallelism)
+        {
+            lock(_tasks)
+                _maxDegreeOfParallelism = maxDegreeOfParallelism;
+        }
+
 
         // Queues a task to the scheduler.  
         protected sealed override void QueueTask(Task task)
