@@ -9,6 +9,10 @@ using System.Timers;
 
 namespace TaskFramework.Lib
 {
+    /// <summary>
+    /// 任务执行队列
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public sealed class ParallelTaskQueue<T> : IParallelTaskContext where T : IParallelTask
     {
         public  TaskScheduler UIThread { private set; get; }
