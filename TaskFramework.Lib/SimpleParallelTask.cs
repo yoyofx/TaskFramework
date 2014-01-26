@@ -105,6 +105,7 @@ namespace TaskFramework.Lib
         {
             this._actionWithObject = action;
             this.AsyncState = state;
+            this._task = new Task(() => { });
         }
 
         /// <summary>
