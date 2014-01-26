@@ -180,6 +180,7 @@ namespace TaskFramework.Lib
         public void SetParallaCount(int count)
         {
             this.Max = count;
+            (this.ParallelScheduler as LimitedConcurrencyLevelTaskScheduler).SetMaxDegreeOfParallelism(count);
         }
 
         /// <summary>
