@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TaskFramework.Lib
 {
+    /// <summary>
+    /// 简单并行任务
+    /// </summary>
     public class SimpleParallelTask : IParallelTask
     {
         #region 字段和属性
