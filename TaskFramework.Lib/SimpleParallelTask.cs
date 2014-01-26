@@ -102,7 +102,7 @@ namespace TaskFramework.Lib
         {
             this._actionWithObject = action;
             this.AsyncState = state;
-            this._task = new Task(this._actionWithObject, this.AsyncState, this._cancellationToken);
+            this._task = new Task(() => { });
         }
 
         /// <summary>
