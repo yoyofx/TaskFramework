@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TaskFramework.Lib
 {
+    /// <summary>
+    /// 简单并行任务
+    /// </summary>
     public class SimpleParallelTask : IParallelTask
     {
         #region 字段和属性
@@ -102,6 +105,7 @@ namespace TaskFramework.Lib
         {
             this._actionWithObject = action;
             this.AsyncState = state;
+            this._task = new Task(() => { });
         }
 
         /// <summary>
