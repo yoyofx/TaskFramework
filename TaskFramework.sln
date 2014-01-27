@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskFramework.Lib", "TaskFramework.Lib\TaskFramework.Lib.csproj", "{79B4EB32-70A5-4B51-8A23-FA867774E556}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{D67A0948-5EEA-44AD-A8E8-2167628B1C6E}"
@@ -21,6 +19,9 @@ Global
 		{D67A0948-5EEA-44AD-A8E8-2167628B1C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D67A0948-5EEA-44AD-A8E8-2167628B1C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D67A0948-5EEA-44AD-A8E8-2167628B1C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = TaskFramework.Lib\TaskFramework.Lib.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
