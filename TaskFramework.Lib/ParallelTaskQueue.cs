@@ -107,16 +107,6 @@ namespace TaskFramework.Lib
         /// </summary>
         public event EventHandler OnResume;
 
-        /// <summary>
-        /// 工作任务调度后台线程
-        /// </summary>
-		//System.Timers.Timer DispatchTaskTimer = new System.Timers.Timer(100);
-
-        /// <summary>
-        /// 已完成任务调度后台线程
-        /// </summary>
-		//System.Timers.Timer DoneTaskTimer = new System.Timers.Timer(100);
-
 		/// <summary>
 		/// 队列监控线程
 		/// </summary>
@@ -168,8 +158,6 @@ namespace TaskFramework.Lib
             this.UIThread = TaskScheduler.FromCurrentSynchronizationContext();
 
 			TaskTimer.Elapsed += TaskTimer_Elapsed;
-			//DispatchTaskTimer.Elapsed += DispatchTaskTimer_Elapsed;
-			//DoneTaskTimer.Elapsed += DoneTaskTimer_Elapsed;
 			switchTimer();
         }
 
@@ -197,8 +185,6 @@ namespace TaskFramework.Lib
 		/// </summary>
 		private void switchTimer()
 		{
-//			DoneTaskTimer.Enabled = !DoneTaskTimer.Enabled;
-//			DispatchTaskTimer.Enabled = !DispatchTaskTimer.Enabled;
 			TaskTimer.Enabled = !TaskTimer.Enabled;
 		}
 
@@ -241,51 +227,6 @@ namespace TaskFramework.Lib
 				}
 			}
 		}
-
-        /// <summary>
-        /// 已完成任务计时器事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-//        void DoneTaskTimer_Elapsed(object sender, ElapsedEventArgs e)
-//        {
-//            Parallel.ForEach(WorkTasks, (x, y) =>
-//            {
-//                if (x.Value.Status == TaskStatus.Canceled ||
-//                x.Value.Status == TaskStatus.Faulted ||
-//                x.Value.Status == TaskStatus.RanToCompletion)
-//                {
-//                    DoneTasks.TryAdd(x.Key, x.Value);
-//                    if (DoneTasksAdded != null) DoneTasksAdded.BeginInvoke(this, new TaskArgs(x.Value,this,x.Value.AsyncState), null, null);
-//                    T t;
-//                    WorkTasks.TryRemove(x.Key, out t);
-//                }
-//            });
-//        }
-        /// <summary>
-        /// 执行任务计时器事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-//        void DispatchTaskTimer_Elapsed(object sender, ElapsedEventArgs e)
-//        {
-//            if (WorkTasks.Count < Max)
-//            {
-//                T t;
-//                if (AllTasks.TryTake(out t))
-//                {
-//                    if (WorkTasks.TryAdd(t.Id, t))
-//                    {
-//                        if (t.Status == TaskStatus.Created)
-//                        {
-//                            t.Start();
-//                        }
-//                        if (WorkTasksAdded != null)
-//                            WorkTasksAdded.Invoke(this, new TaskArgs(t,this,t.AsyncState));
-//                    }
-//                }
-//            }
-//        }
 
         /// <summary>
         /// 终止所有线程，清空待执行任务
