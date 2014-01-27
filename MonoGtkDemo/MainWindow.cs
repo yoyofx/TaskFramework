@@ -18,7 +18,13 @@ public partial class MainWindow: Gtk.Window
 
 	protected void RunTestClicked(object sender, EventArgs e)
 	{
+		CellRendererText idCell = new CellRendererText();
+		CellRendererProgress progressCell = new CellRendererProgress();
 
+		listView.Columns[0].PackStart(idCell, true);
+		listView.Columns[0].AddAttribute(idCell, "text", 0);
+		listView.Columns[1].PackStart(progressCell, true);
+		listView.Columns[1].AddAttribute(progressCell, "text", 1);
 
 
 	}
