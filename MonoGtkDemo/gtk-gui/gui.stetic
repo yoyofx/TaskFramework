@@ -53,7 +53,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.SpinButton" id="spinbutton3">
+                          <widget class="Gtk.SpinButton" id="spTotal">
                             <property name="MemberName" />
                             <property name="WidthRequest">162</property>
                             <property name="CanFocus">True</property>
@@ -108,7 +108,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.SpinButton" id="spinbutton4">
+                          <widget class="Gtk.SpinButton" id="spParallel">
                             <property name="MemberName" />
                             <property name="WidthRequest">162</property>
                             <property name="CanFocus">True</property>
@@ -382,7 +382,7 @@
                     <property name="MemberName" />
                     <property name="ShadowType">In</property>
                     <child>
-                      <widget class="Gtk.TextView" id="textview3">
+                      <widget class="Gtk.TextView" id="tvLog">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="ShowScrollbars">True</property>
@@ -420,7 +420,7 @@
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.Button" id="button9">
+              <widget class="Gtk.Button" id="btnStart">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -435,7 +435,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button10">
+              <widget class="Gtk.Button" id="btnStop">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -450,7 +450,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button11">
+              <widget class="Gtk.Button" id="btnPause">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -465,7 +465,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button12">
+              <widget class="Gtk.Button" id="btnResume">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -480,7 +480,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button13">
+              <widget class="Gtk.Button" id="btnExit">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
