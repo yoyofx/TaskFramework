@@ -5,11 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B4986F2D-9809-4EAA-B7D4-F1E7B92C9700}</ProjectGuid>
+    <ProjectGuid>{C97BFACE-0C21-4FBC-90E0-937A2BB1D8AD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MonoGtkDemo</RootNamespace>
-    <AssemblyName>MonoGtkDemo</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>GTKDemo1</RootNamespace>
+    <AssemblyName>GTKDemo1</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,10 +51,4 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\TaskFramework.Lib\TaskFramework.Lib.csproj">
-      <Project>{79B4EB32-70A5-4B51-8A23-FA867774E556}</Project>
-      <Name>TaskFramework.Lib</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

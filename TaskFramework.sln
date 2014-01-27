@@ -27,7 +27,7 @@ Global
 		{D67A0948-5EEA-44AD-A8E8-2167628B1C6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = TaskFramework.Lib\TaskFramework.Lib.csproj
+		StartupItem = MonoGtkDemo\MonoGtkDemo.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
