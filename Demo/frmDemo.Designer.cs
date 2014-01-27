@@ -206,7 +206,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "并发数量";
+			this.label2.Text = "Paralla Count";
             // 
             // label1
             // 
@@ -215,7 +215,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "任务数量";
+			this.label1.Text = "Task Count";
             // 
             // nTaskCount
             // 
@@ -274,12 +274,12 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "执行进度";
+			this.columnHeader2.Text = "progress";
             this.columnHeader2.Width = 500;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "延迟(ms)";
+			this.columnHeader3.Text = "delay(ms)";
             // 
             // groupBox3
             // 
@@ -334,7 +334,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 13);
             this.label6.TabIndex = 5;
-            this.label6.Text = "完成的任务数量：";
+			this.label6.Text = "done task count:";
             // 
             // label5
             // 
@@ -343,7 +343,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(127, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "正在执行的任务数量：";
+			this.label5.Text = "working task count:";
             // 
             // lbAllTaskCount
             // 
@@ -361,7 +361,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "队列中的任务数量：";
+			this.label4.Text = "all task count:";
             // 
             // lbTaskMax
             // 
@@ -379,7 +379,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "任务数量峰值：";
+			this.label3.Text = "task max value:";
             // 
             // frmDemo
             // 

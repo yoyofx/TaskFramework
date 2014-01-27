@@ -68,7 +68,7 @@ namespace Demo
                 item.SubItems[0].Text = id.ToString();
                 item.SubItems[2].Text = delay.ToString();
             });
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i < 100; i++)
             {
                 if (args.Task.CancellationToken.IsCancellationRequested)
                     break;

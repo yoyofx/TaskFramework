@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,12 +110,17 @@ namespace TaskFramework.Lib
         /// <summary>
         /// 工作任务调度后台线程
         /// </summary>
-        System.Timers.Timer DispatchTaskTimer = new System.Timers.Timer(100);
+		//System.Timers.Timer DispatchTaskTimer = new System.Timers.Timer(100);
 
         /// <summary>
         /// 已完成任务调度后台线程
         /// </summary>
-        System.Timers.Timer DoneTaskTimer = new System.Timers.Timer(100);
+		//System.Timers.Timer DoneTaskTimer = new System.Timers.Timer(100);
+
+		/// <summary>
+		/// 队列监控线程
+		/// </summary>
+		System.Timers.Timer TaskTimer = new System.Timers.Timer(100);
 
         #region 线程安全的单例实现
 
@@ -161,11 +166,11 @@ namespace TaskFramework.Lib
             
             this.Factory = new TaskFactory(this.ParallelScheduler);
             this.UIThread = TaskScheduler.FromCurrentSynchronizationContext();
-            DispatchTaskTimer.AutoReset = true;
-            DoneTaskTimer.AutoReset = true;
-            DispatchTaskTimer.Elapsed += DispatchTaskTimer_Elapsed;
-            DoneTaskTimer.Elapsed += DoneTaskTimer_Elapsed;
-            setTimerStart();
+
+			TaskTimer.Elapsed += TaskTimer_Elapsed;
+			//DispatchTaskTimer.Elapsed += DispatchTaskTimer_Elapsed;
+			//DoneTaskTimer.Elapsed += DoneTaskTimer_Elapsed;
+			switchTimer();
         }
 
         /// <summary>
@@ -187,70 +192,107 @@ namespace TaskFramework.Lib
             (this.ParallelScheduler as LimitedConcurrencyLevelTaskScheduler).SetMaxDegreeOfParallelism(count);
         }
 
-        /// <summary>
-        /// 启动定时器
-        /// </summary>
-        private void setTimerStart()
-        {
-            if (!DoneTaskTimer.Enabled)
-                DoneTaskTimer.Start();
-            if (!DispatchTaskTimer.Enabled)
-                DispatchTaskTimer.Start();
-        }
+		/// <summary>
+		/// 切换Timer状态
+		/// </summary>
+		private void switchTimer()
+		{
+//			DoneTaskTimer.Enabled = !DoneTaskTimer.Enabled;
+//			DispatchTaskTimer.Enabled = !DispatchTaskTimer.Enabled;
+			TaskTimer.Enabled = !TaskTimer.Enabled;
+		}
+
+		/// <summary>
+		/// 任务队列监控线程
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		void TaskTimer_Elapsed(object sender, ElapsedEventArgs e)
+		{
+			//已完成队列
+			Parallel.ForEach(WorkTasks, (x, y) =>
+				{
+					if (x.Value.Status == TaskStatus.Canceled ||
+						x.Value.Status == TaskStatus.Faulted ||
+						x.Value.Status == TaskStatus.RanToCompletion)
+					{
+						DoneTasks.TryAdd(x.Key, x.Value);
+						if (DoneTasksAdded != null) DoneTasksAdded.BeginInvoke(this, new TaskArgs(x.Value,this,x.Value.AsyncState), null, null);
+						T t;
+						WorkTasks.TryRemove(x.Key, out t);
+					}
+				});
+
+			//工作队列
+			if (WorkTasks.Count < Max)
+			{
+				T t;
+				if (AllTasks.TryTake(out t))
+				{
+					if (WorkTasks.TryAdd(t.Id, t))
+					{
+						if (t.Status == TaskStatus.Created)
+						{
+							t.Start();
+						}
+						if (WorkTasksAdded != null)
+							WorkTasksAdded.Invoke(this, new TaskArgs(t,this,t.AsyncState));
+					}
+				}
+			}
+		}
 
         /// <summary>
         /// 已完成任务计时器事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void DoneTaskTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Parallel.ForEach(WorkTasks, (x, y) =>
-            {
-                if (x.Value.Status == TaskStatus.Canceled ||
-                x.Value.Status == TaskStatus.Faulted ||
-                x.Value.Status == TaskStatus.RanToCompletion)
-                {
-                    DoneTasks.TryAdd(x.Key, x.Value);
-                    if (DoneTasksAdded != null) DoneTasksAdded.BeginInvoke(this, new TaskArgs(x.Value,this,x.Value.AsyncState), null, null);
-                    T t;
-                    WorkTasks.TryRemove(x.Key, out t);
-                }
-            });
-        }
-
+//        void DoneTaskTimer_Elapsed(object sender, ElapsedEventArgs e)
+//        {
+//            Parallel.ForEach(WorkTasks, (x, y) =>
+//            {
+//                if (x.Value.Status == TaskStatus.Canceled ||
+//                x.Value.Status == TaskStatus.Faulted ||
+//                x.Value.Status == TaskStatus.RanToCompletion)
+//                {
+//                    DoneTasks.TryAdd(x.Key, x.Value);
+//                    if (DoneTasksAdded != null) DoneTasksAdded.BeginInvoke(this, new TaskArgs(x.Value,this,x.Value.AsyncState), null, null);
+//                    T t;
+//                    WorkTasks.TryRemove(x.Key, out t);
+//                }
+//            });
+//        }
         /// <summary>
         /// 执行任务计时器事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void DispatchTaskTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            if (WorkTasks.Count < Max)
-            {
-                T t;
-                if (AllTasks.TryTake(out t))
-                {
-                    if (WorkTasks.TryAdd(t.Id, t))
-                    {
-                        if (t.Status == TaskStatus.Created)
-                        {
-                            t.Start();
-                        }
-                        if (WorkTasksAdded != null)
-                            WorkTasksAdded.Invoke(this, new TaskArgs(t,this,t.AsyncState));
-                    }
-                }
-            }
-        }
+//        void DispatchTaskTimer_Elapsed(object sender, ElapsedEventArgs e)
+//        {
+//            if (WorkTasks.Count < Max)
+//            {
+//                T t;
+//                if (AllTasks.TryTake(out t))
+//                {
+//                    if (WorkTasks.TryAdd(t.Id, t))
+//                    {
+//                        if (t.Status == TaskStatus.Created)
+//                        {
+//                            t.Start();
+//                        }
+//                        if (WorkTasksAdded != null)
+//                            WorkTasksAdded.Invoke(this, new TaskArgs(t,this,t.AsyncState));
+//                    }
+//                }
+//            }
+//        }
 
         /// <summary>
         /// 终止所有线程，清空待执行任务
         /// </summary>
         public void Stop()
         {
-            DoneTaskTimer.Stop();
-            DispatchTaskTimer.Stop();
+			switchTimer();
 
             //这里应该直接压入到已完成队列，而不是清掉
             while (AllTaskCount > 0)
@@ -263,7 +305,7 @@ namespace TaskFramework.Lib
                 }
             }
 
-            var task = Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() =>
             {
                 while (WorkTaskCount > 0)
                 {
@@ -298,7 +340,7 @@ namespace TaskFramework.Lib
                     OnStop.BeginInvoke(this, null, null, null);
                 }
                 _isStoped = true;
-                setTimerStart();
+				switchTimer();
             });
         }
 
@@ -307,8 +349,7 @@ namespace TaskFramework.Lib
         /// </summary>
         public void Pause()
         {
-            DoneTaskTimer.Stop();
-            DispatchTaskTimer.Stop();
+			switchTimer();
             if (OnPause != null)
             {
                 OnPause.BeginInvoke(this, null, null, null);
@@ -320,8 +361,7 @@ namespace TaskFramework.Lib
         /// </summary>
         public void Resume()
         {
-            DoneTaskTimer.Start();
-            DispatchTaskTimer.Start();
+			switchTimer();
             if (OnResume != null)
             {
                 OnResume.BeginInvoke(this, null, null, null);
