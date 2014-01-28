@@ -53,8 +53,8 @@
     <Compile Include="GtkSynchronizationContext.cs" />
     <Compile Include="gtk-gui\MonoGtkDemo.MainWindow.cs" />
     <Compile Include="IMainView.cs" />
-    <Compile Include="IMainViewContorller.cs" />
     <Compile Include="MainViewController.cs" />
+    <Compile Include="IMainViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
