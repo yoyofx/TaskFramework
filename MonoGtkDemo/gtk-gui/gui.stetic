@@ -8,7 +8,7 @@
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../bin/Debug/MonoGtkDemo.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="953 720">
+  <widget class="Gtk.Window" id="MonoGtkDemo.MainWindow" design-size="953 720">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Task framework test for Mono</property>
     <property name="WindowPosition">CenterOnParent</property>

@@ -8,7 +8,8 @@ namespace MonoGtkDemo
 		public static void Main (string[] args)
 		{
 			Application.Init ();
-			MainWindow win = new MainWindow ();
+			MainWindow win = new MainWindow (new MainViewController());
+
 			win.Show ();
 			Application.Run ();
 		}

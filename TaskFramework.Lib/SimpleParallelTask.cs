@@ -1,4 +1,4 @@
-﻿﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,7 +78,7 @@ namespace TaskFramework.Lib
         /// <summary>
         /// 
         /// </summary>
-        private Action<object> _actionWithObject = null;
+		protected Action<object> _actionWithObject = null;
 
         /// <summary>
         /// 
