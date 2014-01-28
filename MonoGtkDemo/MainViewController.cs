@@ -4,7 +4,7 @@ using TaskFramework.Lib;
 
 namespace MonoGtkDemo
 {
-	public class MainViewController : IMainViewContorller
+	public class MainViewController : IMainViewController
 	{
 		/// <summary>
 		/// 任务执行队列

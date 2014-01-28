@@ -2,7 +2,7 @@ using System;
 
 namespace MonoGtkDemo
 {
-	public interface IMainViewContorller
+	public interface IMainViewController
 	{
 		/// <summary>
 		/// 总的并发数量
