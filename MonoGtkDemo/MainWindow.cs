@@ -11,13 +11,13 @@ namespace MonoGtkDemo
 		/// <summary>
 		/// The main view controller.
 		/// </summary>
-		private readonly IMainViewContorller mainViewController = null;
+		private readonly IMainViewController mainViewController = null;
 		/// <summary>
 		/// ListView的数据源，用于显示任务进度状态。
 		/// </summary>
 		private Gtk.ListStore ListStore = null;
 		
-		public MainWindow (IMainViewContorller controller) : base (Gtk.WindowType.Toplevel)
+		public MainWindow (IMainViewController controller) : base (Gtk.WindowType.Toplevel)
 		{
 			mainViewController = controller;
 			LoadView (); //init views and events
