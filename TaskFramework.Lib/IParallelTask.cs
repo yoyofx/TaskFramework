@@ -14,10 +14,6 @@ namespace TaskFramework.Lib
         /// </summary>
         IParallelTaskContext Context { get; }
 
-        /// <summary>
-        /// 设置上下文
-        /// </summary>
-        /// <param name="context"></param>
         void SetContext(IParallelTaskContext context);
 
         /// <summary>
@@ -50,9 +46,6 @@ namespace TaskFramework.Lib
         /// </summary>
         TaskStatus Status { get; }
 
-        /// <summary>
-        /// Cancel Token
-        /// </summary>
         CancellationToken CancellationToken { get; }
         /// <summary>
         /// 开始任务
